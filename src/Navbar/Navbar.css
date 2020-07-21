@@ -1,0 +1,23 @@
+/* .Navbar img{
+    position: absolute;
+    top: 1vw;
+    left: 3vw;
+    opacity: 1;
+    height: 3vw
+  
+    
+  } */
+
+.Navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: white;
+}
+
+.Navbar-logo{
+    padding-left: 10rem;
+}
+

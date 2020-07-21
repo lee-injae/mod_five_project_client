@@ -2,10 +2,14 @@ import React from 'react'
 
 class SearchForm extends React.Component {
 
+    
+
     render(){
         return(
             <div>
-                SearchForm
+                <form className="search-form">
+                    <input type="text" name="search" placeholder="Search" />
+                </form>
             </div>
         )
     }

@@ -1,16 +1,43 @@
 import React, { Component } from "react"
-import SearchContainer from './SearchContainer'
+import { Link } from 'react-router-dom'
 
-class Navbar extends Component {
+
+import SearchContainer from './SearchContainer'
+import LoginContainer from '../Login/LoginContainer'
+
+import Logo from "../logo.svg"
+import './Navbar.css'
+
+
+
+class NavBar extends Component {
+
+    constructor(){
+        super()
+        this.state= {
+            nickname: "",
+        }
+    }
 
     render(){
-        return(
-            <div>
-                hi ocean
-                <SearchContainer />
+        return (
+            <div className="navbar">
+                <div className="navbar-logo">
+                    <Link to='/'><img style={{height: '3rem', width: '3rem'}} src={Logo} alt='logo'/></Link>      
+                </div>
+                <div className="search-form">
+                    <SearchContainer />
+                </div>
+                <ul className="navbar-menu">
+                    <li><Link to='/login' component={LoginContainer}>Login</Link></li>
+                    <li><Link to='/signup'>Signup</Link></li>
+                </ul>
+                <div className="navbar-avatar">
+                    <p><Link to='/user'>Hi user</Link></p>
+                </div>
             </div>
        )
     }
  }
 
-export default Navbar
+export default NavBar

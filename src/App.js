@@ -1,19 +1,30 @@
 import React from 'react';
-// import logo from './vegetable.svg';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import './vegetable.svg'
 
-import Navbar from "./Navbar/Navbar"
-import Login from "./Login/LoginContainer"
-import LoginContainer from './Login/LoginContainer';
+import NavBar from "./Navbar/NavBar"
+// import LoginContainer from './Login/LoginContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <LoginContainer />
-    </div>
-  );
+class App extends React.Component {
+  
+  constructor(){
+    super()
+    this.state = {
+      currentUser: null,
+      
+    }
+  }
+
+ 
+  render(){
+    return (
+      <div className="App">
+        <NavBar isLogged={this.state.currentUser} />
+        {/* <LoginContainer /> */}
+      </div>
+    );
+  }
 }
 
 export default App;
