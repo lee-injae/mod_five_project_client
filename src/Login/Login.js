@@ -1,23 +1,26 @@
 import React from 'react'
+import { Form } from 'semantic-ui-react'
 
-const Login = () => {
-    return <div>
-                <form className="login-form">
-                    <label>
-                        Email:
-                        <input type="text" placeholder="abc@def.com" name=""/> 
-                    </label>
-                    <label>
-                        Password:
-                        <input type="password" name="password"
-                         value="value" onChange={true}
-                        /> 
-                    </label>
-                    <button className="login-submit-btn" >Log in</button>
-                    Not a member? 
-                    <button className="signup-submit-btn">Sign up</button>
-                </form>
-           </div> 
+
+class Login extends React.Component {
+
+    render(){
+        return (
+            <div>
+                <h4>Log in</h4>
+                <Form onSubmit={this.props.handleSubmit}>
+                    <Form.Group widths="equal">
+                        <Form.Input fluid label='Email:' name="email" placeholder='abc@def.com'
+                        onChange={this.props.handleChange} value={this.props.form.email} />
+                        <Form.Input fluid label='Password:' name="password" placeholder='password'
+                        onChange={this.props.handleChange} value={this.props.form.password} />                        
+                    </Form.Group>
+                    <Form.Button>Login</Form.Button>
+                </Form>
+            </div>
+        )
+    }
 }
+
 
 export default Login

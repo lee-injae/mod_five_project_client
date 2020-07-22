@@ -3,9 +3,6 @@ import React from 'react'
 import Signup from "./Signup"
 import Login from "./Login"
 
-// // import Modal from "react-bootstrap/Modal"
-// // import Button from "react-bootstrap/Button"
-
 import "./LoginContainer.css"
 
 class LoginContainer extends React.Component {
@@ -13,11 +10,76 @@ class LoginContainer extends React.Component {
     constructor(){
         super()
         this.state= {
-            nickname: "",
+            form: {},
             showSignup: false,
             showLogin: false,
         }
     }
+
+    handleChange = (e) => {
+        let formObj = this.state.form 
+        formObj[e.target.name] = e.target.value
+        this.setState({ form: formObj }) 
+    }
+
+    handleSignupSubmit = (e) => {
+        e.preventDefault()
+        fetch('http://localhost:3001/user', {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json', 
+            },
+            body: JSON.stringify({
+                email: this.state.form.email,
+                password: this.state.form.password,
+                nickname: this.state.form.nickname,
+                location: this.state.form.location
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+            this.setState({ form: {} })
+            console.log(data)
+        })
+    }
+
+    handleLoginSubmit = (e) => {
+        e.preventDefault()
+        fetch('http://localhost:3001/user', {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json', 
+            },
+            body: JSON.stringify({
+                email: this.state.form.email,
+                password: this.state.form.password,
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+            this.setState({ form: {} })
+            console.log(data)
+        })
+    }
+
+    render(){
+        // const { showSignup, showLogin } = this.state
+
+        return(
+            <div className="login-container">
+                <Signup handleSubmit={this.handleSignupSubmit} handleChange={this.handleChange}
+                form={this.state.form}  />
+                <Login handleSubmit={this.handleLoginSubmit} handleChange={this.handleChange}
+                form={this.state.form} />
+            </div>
+            );
+        }
+}
+
+export default LoginContainer
+
 
 //     onOpenSignup = () => {
 //         this.setState({ showSignup: true })
@@ -34,43 +96,3 @@ class LoginContainer extends React.Component {
 //     onCloseLogin =() => {
 //         this.setState({ showLogin: false })
 //     }
-
-
-    handleLoginSubmit = (e) => {
-        e.preventDefault()
-        fetch('http://localhost:3001/login', {
-            method:"POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json', 
-            },
-            body: JSON.stringify({
-                email: this.state.form.email,
-                password: this.state.form.password,
-            })
-        })
-        .then(r => r.json())
-        .then(data => {
-            this.setState({ form: {} })
-            if (data.token) {
-                localStorage.setItem('token', data.token)
-                this.props.setUser(data)
-                return data.status
-            }
-            console.log(data)
-        })
-    }
-
-    render(){
-        const { showSignup, showLogin } = this.state
-
-        return(
-            <div className="login-container">
-                <Signup />
-                <Login />
-            </div>
-            );
-        }
-}
-
-export default LoginContainer

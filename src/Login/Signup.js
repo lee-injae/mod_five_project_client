@@ -2,64 +2,32 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 const options = [
-    { key: 'm', text: 'Male', value: 'male' },
-    { key: 'f', text: 'Female', value: 'female' },
-    { key: 'o', text: 'Other', value: 'other' },
+    { key: 'k', text: 'Kalorama', value: 'kalorama' },
+    { key: 'd', text: 'Dupont Circle', value: 'dupont' },
+    { key: 'a', text: 'Adams Morgan', value: 'adams morgan' },
+    { key: 'w', text: 'Woodley Park', value: 'woodley park' },
+    { key: 'u', text: 'U Street', value: 'u street' }
   ]
 
 class Signup extends React.Component {
-
-    state = { location: ""}
-
-    handleChange(e){
-        debugger
-        this.setState({ location: e.target.value })
-        
-    }
-
-    handleSubmit =(e) => {
-        e.preventDefault()
-        fetch('http://localhost:3001/user', {
-            method:"POST",
-            headers: {
-                'Content-Type': "application/json",
-                'Accept': "application/json"
-            },
-            body: JSON.stringify({
-                email: this.state.form.email,
-                password: this.state.form.password,
-                nickname: this.state.form.nickname,
-                location: this.state.form.location
-            })
-        })
-        .then(r => r.json())
-        .then(data => {
-            this.setState({ form: {} })
-            if (data.token) {
-                localStorage.setItem('token', data.token)
-                this.props.setUser(data)
-                return data.status
-            }
-            return console.log(data)
-        })
-    }
-
    
-
     render() {
         return (
-                <Form className="signup-form" onSubmit={this.handleSubmit}>
-                <Form.Group widths="equal">
-                    <Form.Input fluid required label="Email" placeholder="abc@def.com" 
-                        onChange={this.handleChange} value={this.state.email}/>  
-                    <Form.Input fluid required label="Password" placeholder="password" 
-                        onChange={this.handleChange} value={this.state.password}/>
-                    <Form.Input fluid required label="Nickname" placeholder="Ocean" 
-                        onChange={this.handleChange} value={this.state.nickname}/>     
-                    <Form.Select fluid required label="Location" options={options} placeholder="Location" />       
-                </Form.Group>                 
-                <Form.Button>Submit</Form.Button>
-            </Form>
+            <div>
+                <h4>Sign up</h4>
+                <Form onSubmit={this.props.handleSubmit}>
+                    <Form.Group widths="equal">
+                        <Form.Input fluid required label="Email" name="email" placeholder="abc@def.com" 
+                            onChange={this.props.handleChange} value={this.props.form.email}/>  
+                        <Form.Input fluid required label="Password" name="password" placeholder="password" 
+                            onChange={this.props.handleChange} value={this.props.form.password}/>
+                        <Form.Input fluid required label="Nickname" name="nickname" placeholder="nickname" 
+                            onChange={this.props.handleChange} value={this.props.form.nickname}/>     
+                        <Form.Select fluid required label="Location" name="" options={options} placeholder="Location" />       
+                    </Form.Group>                 
+                    <Form.Button>Sign up</Form.Button>
+                </Form>
+            </div>
         )
     }
 }
