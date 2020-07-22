@@ -17,24 +17,34 @@ class LoginContainer extends React.Component {
     }
 
     handleChange = (e) => {
+        // debugger
         let formObj = this.state.form 
         formObj[e.target.name] = e.target.value
         this.setState({ form: formObj }) 
     }
 
+      
+    handleDropdownChange = (e,data) => {
+        // debugger
+        let formObj = this.state.form
+        formObj[e.target.name] = data.value
+        this.setState({ form: formObj})
+    }
+
     handleSignupSubmit = (e) => {
+        const {email, password, nickname, location_id} = this.state.form
         e.preventDefault()
-        fetch('http://localhost:3001/user', {
+        fetch('http://localhost:3000/user', {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json', 
             },
             body: JSON.stringify({
-                email: this.state.form.email,
-                password: this.state.form.password,
-                nickname: this.state.form.nickname,
-                location: this.state.form.location
+                email: email,
+                password: password,
+                nickname: nickname,
+                location_id: location_id
             })
         })
         .then(r => r.json())
@@ -46,7 +56,7 @@ class LoginContainer extends React.Component {
 
     handleLoginSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3001/user', {
+        fetch('http://localhost:3000/user', {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +80,7 @@ class LoginContainer extends React.Component {
         return(
             <div className="login-container">
                 <Signup handleSubmit={this.handleSignupSubmit} handleChange={this.handleChange}
-                form={this.state.form}  />
+                form={this.state.form} handleDropdownChange={this.handleDropdownChange}  />
                 <Login handleSubmit={this.handleLoginSubmit} handleChange={this.handleChange}
                 form={this.state.form} />
             </div>
