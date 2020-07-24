@@ -27,14 +27,14 @@ class LoginContainer extends React.Component {
     handleDropdownChange = (e,data) => {
         // debugger
         let formObj = this.state.form
-        formObj[e.target.name] = data.value
+        formObj[data.name] = data.value
         this.setState({ form: formObj})
     }
 
     handleSignupSubmit = (e) => {
         const {email, password, nickname, location_id} = this.state.form
         e.preventDefault()
-        fetch('http://localhost:3000/user', {
+        fetch('http://localhost:3000//api/v1/users', {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -50,13 +50,14 @@ class LoginContainer extends React.Component {
         .then(r => r.json())
         .then(data => {
             this.setState({ form: {} })
+            localStorage.setItem('jwt', data.jwt)
             console.log(data)
         })
     }
 
     handleLoginSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/user', {
+        fetch('http://localhost:3000/api/v1/users', {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -70,8 +71,15 @@ class LoginContainer extends React.Component {
         .then(r => r.json())
         .then(data => {
             this.setState({ form: {} })
+            if (data.token){
+                localStorage.setItem('token', data.token)
+            }
             console.log(data)
         })
+    }
+
+    toggleForm = () => {
+        this.setState({showSignup: !this.state.showSignup})
     }
 
     render(){
@@ -79,10 +87,17 @@ class LoginContainer extends React.Component {
 
         return(
             <div className="login-container">
-                <Signup handleSubmit={this.handleSignupSubmit} handleChange={this.handleChange}
-                form={this.state.form} handleDropdownChange={this.handleDropdownChange}  />
-                <Login handleSubmit={this.handleLoginSubmit} handleChange={this.handleChange}
-                form={this.state.form} />
+                <div className='login-toggle-bar'>
+                    <div className='login-tab' onClick={this.toggleForm}>Sign up</div>
+                    <div className='login-tab' onClick={this.toggleForm}>Log in</div>
+                </div>
+                
+                {this.state.showSignup ? <Signup handleSubmit={this.handleSignupSubmit} handleChange={this.handleChange}
+                form={this.state.form} handleDropdownChange={this.handleDropdownChange} /> 
+                : <Login handleSubmit={this.handleLoginSubmit} handleChange={this.handleChange}
+                form={this.state.form} />  
+                }
+            
             </div>
             );
         }

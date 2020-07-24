@@ -2,11 +2,11 @@ import React from 'react'
 import { Form } from 'semantic-ui-react'
 
 const options = [
-    { key: 'a', text: 'Adams Morgan', value: 6 },
-    { key: 'd', text: 'Dupont Circle', value: 7 },
-    { key: 'k', text: 'Kalorama', value: 8 },
-    { key: 'u', text: 'U Street', value: 9 },
-    { key: 'w', text: 'Woodley Park', value: 10 },
+    { key: 'a', text: 'Adams Morgan', value: 11 },
+    { key: 'd', text: 'Dupont Circle', value: 12 },
+    { key: 'k', text: 'Kalorama', value: 13 },
+    { key: 'u', text: 'U Street', value: 14 },
+    { key: 'w', text: 'Woodley Park', value: 15 },
   ]
 
 class Signup extends React.Component {
