@@ -19,6 +19,12 @@ class NavBar extends Component {
         }
     }
 
+    logout = () => {
+        console.log('logging out')
+        localStorage.removeItem('token')
+        this.props.removeUser()
+    }
+
     render(){
         return (
             <div className="navbar">
@@ -30,12 +36,13 @@ class NavBar extends Component {
                 </div>
                 { this.props.currentUser ? 
                     (<div className="navbar-avatar">
-                    <p><Link to='/user'>Hi {this.props.currentUser.nickname}</Link></p>
+                    <p><Link to='/user'>Hi user</Link></p>
+                    <p><button onClick={this.logout}>Log out</button></p>
                     </div>) 
                 :  (<div>
                     <ul className="navbar-menu">
-                        <li><Link to='/login' component={LoginContainer}>Login</Link></li>
-                        <li><Link to='/signup'>Signup</Link></li>
+                        {/* <li><Link to='/login' component={LoginContainer}>Login</Link></li>
+                        <li><Link to='/signup'>Signup</Link></li> */}
                     </ul> 
                 </div>)}
             </div>

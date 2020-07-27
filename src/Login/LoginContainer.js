@@ -49,15 +49,15 @@ class LoginContainer extends React.Component {
         })
         .then(r => r.json())
         .then(data => {
-            this.setState({ form: {} })
             localStorage.setItem('jwt', data.jwt)
+            this.setState({ form: {} })
             console.log(data)
         })
     }
 
     handleLoginSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/api/v1/users', {
+        fetch('http://localhost:3000/api/v1/login', {
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -71,10 +71,12 @@ class LoginContainer extends React.Component {
         .then(r => r.json())
         .then(data => {
             this.setState({ form: {} })
-            if (data.token){
-                localStorage.setItem('token', data.token)
+            if (data.jwt){
+                localStorage.setItem('token', data.jwt)
+                this.props.setUser(data)
+                return data.status
             }
-            console.log(data)
+            return console.log(data)
         })
     }
 
@@ -84,7 +86,7 @@ class LoginContainer extends React.Component {
 
     render(){
         // const { showSignup, showLogin } = this.state
-
+        // console.log(this.props.locationIds)
         return(
             <div className="login-container">
                 <div className='login-toggle-bar'>
@@ -93,11 +95,10 @@ class LoginContainer extends React.Component {
                 </div>
                 
                 {this.state.showSignup ? <Signup handleSubmit={this.handleSignupSubmit} handleChange={this.handleChange}
-                form={this.state.form} handleDropdownChange={this.handleDropdownChange} /> 
+                form={this.state.form} handleDropdownChange={this.handleDropdownChange} locationIds={this.props.locationIds} /> 
                 : <Login handleSubmit={this.handleLoginSubmit} handleChange={this.handleChange}
                 form={this.state.form} />  
                 }
-            
             </div>
             );
         }

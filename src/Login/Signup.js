@@ -1,37 +1,34 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
-
-const options = [
-    { key: 'a', text: 'Adams Morgan', value: 11 },
-    { key: 'd', text: 'Dupont Circle', value: 12 },
-    { key: 'k', text: 'Kalorama', value: 13 },
-    { key: 'u', text: 'U Street', value: 14 },
-    { key: 'w', text: 'Woodley Park', value: 15 },
-  ]
-
-class Signup extends React.Component {
- 
-
-    render() {
-        return (
-            <div>
-                <h4>Sign up</h4>
-                <Form onSubmit={this.props.handleSubmit}>
+    
+    const options = [
+        { key: 'a', text: 'Adams Morgan', value: 41 },
+        { key: 'd', text: 'Dupont Circle', value: 42 },
+        { key: 'k', text: 'Kalorama', value: 43 },
+        { key: 'u', text: 'U Street', value: 44 },
+        { key: 'w', text: 'Woodley Park', value: 45 },
+    ]
+    
+    function SignupForm (props) {
+     
+            return (
+                <>
+                <h2>Sign up</h2>
+                <Form onSubmit={props.handleSubmit}>
                     <Form.Group widths="equal">
                         <Form.Input fluid required label="Email" name="email" placeholder="abc@def.com" 
-                            onChange={this.props.handleChange} value={this.props.form.email}/>  
+                            onChange={props.handleChange} value={props.form.email}/>  
                         <Form.Input fluid required label="Password" name="password" placeholder="password" 
-                            onChange={this.props.handleChange} value={this.props.form.password}/>
+                            onChange={props.handleChange} value={props.form.password}/>
                         <Form.Input fluid required label="Nickname" name="nickname" placeholder="nickname" 
-                            onChange={this.props.handleChange} value={this.props.form.nickname}/>     
+                            onChange={props.handleChange} value={props.form.nickname}/>     
                         <Form.Select fluid required label="Location" name="location_id" 
-                            options={options} placeholder="Location" onChange={this.props.handleDropdownChange} />       
+                            options={options} placeholder="Location" onChange={props.handleDropdownChange} />       
                     </Form.Group>                 
                     <Form.Button>Sign up</Form.Button>
                 </Form>
-            </div>
-        )
+                </>)
     }
-}
+    
 
-export default Signup
+export default SignupForm

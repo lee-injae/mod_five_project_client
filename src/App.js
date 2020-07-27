@@ -4,7 +4,9 @@ import React from 'react';
 import './App.css';
 
 import NavBar from "./Navbar/NavBar"
-import Post from "./Post/PostContainer"
+// import Post from "./Post/PostContainer"
+import LoginContainer from "./Login/LoginContainer"
+import PostContainer from './Post/PostContainer';
 
 // import LoginContainer from './Login/LoginContainer';
 
@@ -14,20 +16,44 @@ class App extends React.Component {
     super()
     this.state = {
       currentUser: null,
-      post: [],
-      searchText: ""
+      posts: [],
+      searchText: "",
+      locationIds: []
     }
   }
 
   setUser = (user) => {
-    this.setState({currentUser: user})
+    this.setState( {currentUser: user} )
+    this.getPosts()
+  }
+
+  removeUser = () => {
+    this.setState({currentUser: null})
+    this.getPosts()
   }
 
   componentDidMount(){
-    if (localStorage.getItem('jwt')){
-      fetch("http://localhost:3000/api/v1/users", {
+    this.getCurrentUser()
+    this.getPosts()
+    this.getLocationId()
+  }
+
+  getLocationId(){
+    fetch("http://localhost:3000/locations")
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+      this.setState({ locationIds: data})
+    })
+  }
+
+  getCurrentUser =() => {
+    if (localStorage.getItem('token')){
+      fetch("http://localhost:3000/api/v1/profile", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+          'Content-Type':'applicatio/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         } 
       })
       .then(r => r.json())
@@ -35,17 +61,19 @@ class App extends React.Component {
         this.setState({ currentUser: data})
       })
     }
-
-
-    this.getPost()
   }
 
-  getPost = () => {
-    fetch("http://localhost:3000/post")
+  getPosts = () => {
+    fetch("http://localhost:3000/posts", {
+      headers: {
+        'Content-Type':'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }})
     .then(r => r.json())
-    .then(postDataArray => {
-      console.log(postDataArray)
-      this.setState({ post: postDataArray})
+    .then(data => {
+      console.log(data)
+      this.setState({ posts: data})
     })
   }
 
@@ -53,9 +81,11 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <NavBar currentUser={this.state.currentUser} />
-        <Post postObjArray={this.state.post}/>
-        {/* <LoginContainer /> */}
+        <NavBar currentUser={!!this.state.currentUser} setUser={this.setUser} 
+        removeUser={this.removeUser}  />
+        <LoginContainer setUser={this.setUser} locationIds={this.state.locationIds}/>
+        <PostContainer posts={this.state.posts}/>
+        
       </div>
     );
   }
