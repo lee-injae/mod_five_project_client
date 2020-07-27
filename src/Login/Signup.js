@@ -1,16 +1,16 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
     
-    const options = [
-        { key: 'a', text: 'Adams Morgan', value: 41 },
-        { key: 'd', text: 'Dupont Circle', value: 42 },
-        { key: 'k', text: 'Kalorama', value: 43 },
-        { key: 'u', text: 'U Street', value: 44 },
-        { key: 'w', text: 'Woodley Park', value: 45 },
-    ]
     
     function SignupForm (props) {
-     
+        
+        const options = [
+            { key: 'a', text: 'Adams Morgan', value: props.locationIds[0] },
+            { key: 'd', text: 'Dupont Circle', value: 42 },
+            { key: 'k', text: 'Kalorama', value: 43 },
+            { key: 'u', text: 'U Street', value: 44 },
+            { key: 'w', text: 'Woodley Park', value: 45 },
+        ]
             return (
                 <>
                 <h2>Sign up</h2>

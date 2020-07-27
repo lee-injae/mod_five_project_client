@@ -32,7 +32,7 @@ class NavBar extends Component {
                     <Link to='/'><img style={{height: '3rem', width: '3rem'}} src={Logo} alt='logo'/></Link>      
                 </div>
                 <div className="search-form">
-                    <SearchContainer />
+                    <SearchContainer changeSearch={this.props.changeSearch} />
                 </div>
                 { this.props.currentUser ? 
                     (<div className="navbar-avatar">

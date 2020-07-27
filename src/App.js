@@ -7,6 +7,8 @@ import NavBar from "./Navbar/NavBar"
 // import Post from "./Post/PostContainer"
 import LoginContainer from "./Login/LoginContainer"
 import PostContainer from './Post/PostContainer';
+import PostForm from './PostForm'
+// import SearchContainer from './Navbar/SearchContainer'
 
 // import LoginContainer from './Login/LoginContainer';
 
@@ -77,15 +79,24 @@ class App extends React.Component {
     })
   }
 
+  changeSearch = (e) => {
+    let searchText = e.target.value
+    this.setState({ searchText: searchText })
+  }
  
+  filterPost = () => {
+    let {posts, searchText} = this.state
+    return posts.filter(post => post.title.includes(searchText))
+  }
+
   render(){
     return (
       <div className="App">
         <NavBar currentUser={!!this.state.currentUser} setUser={this.setUser} 
-        removeUser={this.removeUser}  />
+        removeUser={this.removeUser} changeSearch={this.changeSearch}  />
         <LoginContainer setUser={this.setUser} locationIds={this.state.locationIds}/>
-        <PostContainer posts={this.state.posts}/>
-        
+        <PostContainer posts={this.filterPost()}/>
+        <PostForm />
       </div>
     );
   }

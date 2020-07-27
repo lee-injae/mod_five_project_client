@@ -1,15 +1,16 @@
 import React from 'react'
-import SearchForm from './SearchForm'
+// import SearchForm from './SearchForm'
 
-class SearchContainer extends React.Component {
-
-    render(){
-        return(
+const SearchContainer = props => {
+        return (
             <div>
-                <SearchForm />
+                <form className="search-form">
+                    <input type="text" name="search" placeholder="Search" 
+                        onChange={props.changeSearch}  />
+                </form>
             </div>
         )
     }
-}
+
 
 export default SearchContainer
