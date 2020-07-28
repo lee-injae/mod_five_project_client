@@ -3,13 +3,13 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 
 class PostCard extends React.Component {
-
     render(){
+
         const {title, price, date, description, image} = this.props.postObj
         // console.log(this.props.postObj)
         return (
-            <Card>
-                <Image src={image} wrapped ui={false} />
+            <Card >
+                <Image src={image} wrapped ui={false} size='medium' rounded />
                 <Card.Content>
                     <Card.Header>
                         {title}
@@ -36,8 +36,8 @@ class PostCard extends React.Component {
                 </Card.Content>
                     <Card.Content extra>
                     <a>
-                        <Icon name='circle outline' />
-                        10 Friends
+                        <Icon name='like' />
+                       10 interests
                     </a>
                     </Card.Content>
             </Card>

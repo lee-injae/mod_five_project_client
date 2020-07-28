@@ -1,7 +1,7 @@
 import React from 'react'
 // import SearchForm from './SearchForm'
 
-const SearchContainer = props => {
+const Search = props => {
         return (
             <div>
                 <form className="search-form">
@@ -12,5 +12,4 @@ const SearchContainer = props => {
         )
     }
 
-
-export default SearchContainer
+export default Search

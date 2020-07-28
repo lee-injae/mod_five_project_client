@@ -15,7 +15,7 @@ class Login extends React.Component {
                         <Form.Input fluid label='Password:' name="password" placeholder='password'
                         onChange={this.props.handleChange} value={this.props.form.password} />                        
                     </Form.Group>
-                    <Form.Button>Login</Form.Button>
+                    <Form.Button>Log in</Form.Button>
                 </Form>
             </div>
         )

@@ -1,14 +1,12 @@
 import React, { Component } from "react"
 import { Link } from 'react-router-dom'
 
-
-import SearchContainer from './SearchContainer'
+import User from '../User'
+import Search from './Search'
 import LoginContainer from '../Login/LoginContainer'
 
 import Logo from "../logo.svg"
 import './Navbar.css'
-
-
 
 class NavBar extends Component {
 
@@ -32,7 +30,7 @@ class NavBar extends Component {
                     <Link to='/'><img style={{height: '3rem', width: '3rem'}} src={Logo} alt='logo'/></Link>      
                 </div>
                 <div className="search-form">
-                    <SearchContainer changeSearch={this.props.changeSearch} />
+                    <Search changeSearch={this.props.changeSearch} />
                 </div>
                 { this.props.currentUser ? 
                     (<div className="navbar-avatar">

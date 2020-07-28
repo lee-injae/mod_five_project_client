@@ -23,7 +23,6 @@ class LoginContainer extends React.Component {
         this.setState({ form: formObj }) 
     }
 
-      
     handleDropdownChange = (e,data) => {
         // debugger
         let formObj = this.state.form

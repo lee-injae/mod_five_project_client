@@ -15,10 +15,5 @@ class PostContainer extends React.Component {
     }
 }
 
-// <Card.Group itemsPerRow={6}>
-// {this.props.pokemon.map(pokemon => {
-//   return <PokemonCard pokemon={pokemon} key={pokemon.id}/>
-// })}
-// </Card.Group>
 
 export default PostContainer
