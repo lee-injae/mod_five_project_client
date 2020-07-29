@@ -48,7 +48,7 @@ class LoginContainer extends React.Component {
         })
         .then(r => r.json())
         .then(data => {
-            localStorage.setItem('jwt', data.jwt)
+            localStorage.setItem('token', data.jwt)
             this.setState({ form: {} })
             console.log(data)
         })

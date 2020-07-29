@@ -10,9 +10,9 @@ class Login extends React.Component {
                 <h4>Log in</h4>
                 <Form onSubmit={this.props.handleSubmit}>
                     <Form.Group widths="equal">
-                        <Form.Input fluid label='Email:' name="email" placeholder='abc@def.com'
+                        <Form.Input fluid label='Email' name="email" placeholder='abc@def.com'
                         onChange={this.props.handleChange} value={this.props.form.email} />
-                        <Form.Input fluid label='Password:' name="password" placeholder='password'
+                        <Form.Input fluid label='Password' type="password" name="password" 
                         onChange={this.props.handleChange} value={this.props.form.password} />                        
                     </Form.Group>
                     <Form.Button>Log in</Form.Button>

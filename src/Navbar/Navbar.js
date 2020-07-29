@@ -28,7 +28,7 @@ class NavBar extends Component {
         return (
             <div className="navbar">
                 <div className="navbar-logo">
-                    <Link to='/'><img style={{height: '3rem', width: '3rem'}} src={Logo} alt='logo'/></Link>      
+                    <Link to='/posts'><img style={{height: '3rem', width: '3rem'}} src={Logo} alt='logo'/></Link>      
                 </div>
                 <div className="search-form">
                     <Search changeSearch={this.props.changeSearch} />

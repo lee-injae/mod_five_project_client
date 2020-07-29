@@ -17,12 +17,12 @@ import { Form } from 'semantic-ui-react'
                         <Form.Group widths="equal">
                             <Form.Input fluid required label="Email" name="email" placeholder="abc@def.com" 
                                 onChange={props.handleChange} value={props.form.email}/>  
-                            <Form.Input fluid required label="Password" name="password" placeholder="password" 
+                            <Form.Input fluid required label="Password" name="password" type="password" 
                                 onChange={props.handleChange} value={props.form.password}/>
                             <Form.Input fluid required label="Nickname" name="nickname" placeholder="nickname" 
                                 onChange={props.handleChange} value={props.form.nickname}/>     
                             <Form.Select fluid required label="Location" name="location_id" 
-                                options={options} placeholder="Location" onChange={props.handleDropdownChange} />       
+                                options={options} placeholder="Select your location" onChange={props.handleDropdownChange} />       
                         </Form.Group>                 
                         <Form.Button>Sign up</Form.Button>
                     </Form>

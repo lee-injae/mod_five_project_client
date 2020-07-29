@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Route } from 'react-router-dom'
+
 import './App.css';
 
 import NavBar from "./Navbar/NavBar"
@@ -7,6 +9,7 @@ import LoginContainer from "./Login/LoginContainer"
 import PostContainer from './Post/PostContainer';
 import PostForm from './PostForm'
 import Filters from './Filters'
+// import PostCardShow from './Post/PostCardShow';
 
 class App extends React.Component {
   
@@ -17,6 +20,7 @@ class App extends React.Component {
       posts: [],
       searchText: "",
       locationIds: [],
+      selectedPost: null,
       filters: {
         locations: "all"
       }
@@ -121,14 +125,18 @@ class App extends React.Component {
   render(){
     // let searchFilteredPosts = this.searchFilterPost()
     // let sortedPosts = this.sortedPostsByDate(this.state.posts) 
-
+  
     return (
       <div className="App">
         <NavBar currentUser={!!this.state.currentUser} setUser={this.setUser} 
         removeUser={this.removeUser} changeSearch={this.changeSearch}  />
-        <LoginContainer setUser={this.setUser} locationIds={this.state.locationIds}/>
-        <PostContainer posts={this.searchFilterPost()}/>
         <Filters changeType={this.changeFilterType} locationIds={this.state.locationIds} />
+        <Route exact={true} path="/" render={() => <LoginContainer
+          setUser={this.setUser} locationIds={this.state.locationIds}
+        />}/>
+        <Route exact={true} path="/posts" render={() => <PostContainer 
+          posts={this.searchFilterPost()}
+        />}/>
         <PostForm addPost={this.addPost} currentUser={this.state.currentUser} />
       </div>
     );
@@ -136,3 +144,9 @@ class App extends React.Component {
 }
 
 export default App;
+
+//  {/* <Route exact={true} path="/posts/:id" render={(routerProps) => {
+//           let selectedPostId = routerProps.match.params.id 
+//           let found = this.state.posts.find(p => p.id === selectedPostId) 
+//           return <PostCardShow />
+//         }}/>  
