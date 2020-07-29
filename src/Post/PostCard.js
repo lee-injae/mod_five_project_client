@@ -1,14 +1,26 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
-
+import PostCardShow from './PostCardShow'
 
 class PostCard extends React.Component {
-    render(){
 
+    constructor(){
+        super()
+        this.state = {
+            showDetails: false 
+        }
+    }
+
+    showDetail = () => {
+        this.setState({ showDetails: !this.state.showDetails })
+    }
+
+    render(){
         const {title, price, date, description, image} = this.props.postObj
-        // console.log(this.props.postObj)
+
         return (
-            <Card >
+            <div>
+            <Card onClick={this.showDetail} >
                 <Image src={image} wrapped ui={false} size='medium' rounded />
                 <Card.Content>
                     <Card.Header>
@@ -41,6 +53,14 @@ class PostCard extends React.Component {
                     </a>
                     </Card.Content>
             </Card>
+            
+              {this.state.showDetails ? 
+              <div>
+                  <PostCardShow postObj={this.props.postObj}  />
+                  </div> 
+                  : 
+                  null }          
+            </div>
             )
             
     }

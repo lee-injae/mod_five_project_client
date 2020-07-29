@@ -24,6 +24,7 @@ class NavBar extends Component {
     }
 
     render(){
+        console.log(this.props)
         return (
             <div className="navbar">
                 <div className="navbar-logo">
@@ -34,7 +35,7 @@ class NavBar extends Component {
                 </div>
                 { this.props.currentUser ? 
                     (<div className="navbar-avatar">
-                    <p><Link to='/user'>Hi user</Link></p>
+                    <p><Link to='/user'>Hi </Link></p>
                     <p><button onClick={this.logout}>Log out</button></p>
                     </div>) 
                 :  (<div>

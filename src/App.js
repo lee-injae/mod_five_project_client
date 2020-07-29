@@ -74,7 +74,8 @@ class App extends React.Component {
     .then(r => r.json())
     .then(data => {
       console.log(data)
-      this.setState({ posts: data})
+      let sortedPosts = this.sortPostsByDate(data)
+      this.setState({ posts: sortedPosts})
     })
   }
 
@@ -107,12 +108,20 @@ class App extends React.Component {
     .then(r => r.json())
     .then(data => {
       console.log(data)
-      this.setState({ posts: data})
+      let sortedPosts = this.sortPostsByDate(data)
+      this.setState({ posts: sortedPosts})
     })
+  }
+
+  sortPostsByDate = (array) => {
+   return array.sort( (a, b) => new Date(b.date) - new Date(a.date) ) 
   }
 
 
   render(){
+    // let searchFilteredPosts = this.searchFilterPost()
+    // let sortedPosts = this.sortedPostsByDate(this.state.posts) 
+
     return (
       <div className="App">
         <NavBar currentUser={!!this.state.currentUser} setUser={this.setUser} 

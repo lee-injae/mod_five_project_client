@@ -25,7 +25,7 @@ class PostForm extends React.Component {
     handleSubmit = (e) => {
         console.log("submitting")
         e.preventDefault();
-        const {title, price, date, description, image } = this.state
+        const {title, price, date, description, image, sold } = this.state
         fetch('http://localhost:3000/post', {
             method: 'POST',
             headers: {
@@ -38,7 +38,8 @@ class PostForm extends React.Component {
                 price: price,
                 date: date,
                 description: description,
-                image: image
+                image: image,
+                sold: sold
             })
         })
         .then(r => r.json())
@@ -48,7 +49,6 @@ class PostForm extends React.Component {
             this.props.addPost(data)
         })
     }
-
   
     render(){
         return (
@@ -68,7 +68,7 @@ class PostForm extends React.Component {
                 <Form.TextArea fluid required label="Description" 
                     name="description" onChange={this.handleChange} 
                     value={this.state.description} />
-                <Form.Button>Post</Form.Button>
+                <Form.Button>Post an item</Form.Button>
             </Form>
         )
     }
