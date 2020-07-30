@@ -1,18 +1,13 @@
 import React from "react"
 import 'semantic-ui-css/semantic.min.css'
 
-// import { Form } from "semantic-ui-react"
-
-class Filters extends React.Component {
-
-
-    render(){
+const Filters = (props) => {
         return(
-            <div className="ui form">
-                <h3>Neighborhood</h3>
+            <div className="ui selection dropdown">
+                <h4>Neighborhood</h4>
                 <div className="field">
                     <select name="locations" id="locations"
-                    onChange={this.props.changeType}>
+                     onChange={props.changeFilterType}>
                         <option value="all">All</option>
                         <option value="adamsmorgan">Adams Morgan</option>
                         <option value="dupontcircle">Dupont Circle</option>
@@ -24,7 +19,5 @@ class Filters extends React.Component {
             </div>
         )
     }
-
-}
 
 export default Filters

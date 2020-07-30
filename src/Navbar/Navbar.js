@@ -6,7 +6,7 @@ import Search from './Search'
 import LoginContainer from './Login/LoginContainer'
 import PostForm from "./PostForm"
 
-import { Modal, Icon, Button } from 'semantic-ui-react'
+import { Form, Modal, Icon, Button } from 'semantic-ui-react'
 
 
 class NavBar extends Component {
@@ -22,7 +22,7 @@ class NavBar extends Component {
         return (
             <div className="ui small menu">
                 <div className="header item">
-                    <Link to='/posts'>
+                    <Link to='/'>
                         <img style={{height: '4rem', width: '5rem'}} src={Logo} alt='logo'/>
                     </Link>      
                 </div>
@@ -41,15 +41,22 @@ class NavBar extends Component {
                 { this.props.isLogged ? 
                     (<div className="ui fluid two item menu" >
                     <p className="item">
-                        <Link to='/user'><div className="ui big label">{this.props.userInfo.nickname}</div> </Link>
+                        {/* <Link to='/user'> */}
+                            <div className="ui big label">
+                                {this.props.userInfo.nickname}
+                            </div> 
+                        {/* </Link> */}
                     </p>
                     <p className="item">
-                        <button className="ui button" onClick={this.logout}>Log out</button>
+                        <button className="ui button" onClick={this.logout}>
+                            Log out
+                        </button>
                     </p>
                     </div>) 
                 :  
-                    <LoginContainer setUser={this.props.setUser} 
-                            locationIds={this.props.locationIds} 
+                    <LoginContainer 
+                        setUser={this.props.setUser} 
+                        locationIds={this.props.locationIds} 
                     />
                 }
                 </div>

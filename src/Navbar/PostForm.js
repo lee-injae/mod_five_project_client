@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
 class PostForm extends React.Component {
 
@@ -53,19 +54,20 @@ class PostForm extends React.Component {
     render(){
         return (
             <Form onSubmit={this.handleSubmit}>
-                <Form.Group >
-                    <Form.Input fluid required label="ImageUrl" 
+                <Form.Group  >
+                    <Form.Input width={13} required label="ImageUrl" 
                     name="image" onChange={this.handleChange} 
                     value={this.state.image} />
-                    <br/>
-                    <Form.Input fluid required label="Title" 
+                </Form.Group>
+                <Form.Group  >
+                    <Form.Input width={8} required label="Title" 
                     name="title" onChange={this.handleChange} 
                     value={this.state.title} />
-                    <Form.Input fluid required label="Price" 
+                    <Form.Input width={2} required label="Price" 
                     name="price" onChange={this.handleChange} 
                     value={this.state.price} />
                 </Form.Group>
-                <Form.TextArea fluid required label="Description" 
+                <Form.TextArea width={13} required label="Description" 
                     name="description" onChange={this.handleChange} 
                     value={this.state.description} />
                 <Form.Button>Post an item</Form.Button>

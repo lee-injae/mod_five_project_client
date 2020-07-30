@@ -1,15 +1,12 @@
 import React from 'react';
 
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import './App.css';
 
 import NavBar from "./Navbar/NavBar"
-import LoginContainer from "./Navbar/Login/LoginContainer"
 import PostContainer from './Post/PostContainer';
-import PostForm from './Navbar/PostForm'
-import Filters from './Post/Filters'
-// import PostCardShow from './Post/PostCardShow';
+import PostDetail from './Post/PostDetail'
 
 class App extends React.Component {
   
@@ -121,7 +118,6 @@ class App extends React.Component {
    return array.sort( (a, b) => new Date(b.date) - new Date(a.date) ) 
   }
 
-
   render(){
     // let searchFilteredPosts = this.searchFilterPost()
     // let sortedPosts = this.sortedPostsByDate(this.state.posts) 
@@ -137,15 +133,31 @@ class App extends React.Component {
           addPost={this.addPost} 
           currentUser={this.state.currentUser} 
         />
-        <PostContainer 
-          posts={this.searchFilterPost()} 
-          locationIds={this.state.locationIds}
-          changeType={this.changeFilterType}
-        />
+        <Switch>
+        <Route path="/posts/:id" render={(routerProps) => {     
+            let selectedPostId = routerProps.match.params.id
+            let found = this.state.posts.find(p => p.id == selectedPostId)
+              return <PostDetail postObj={found} /> 
+          }}/>
+
+          <Route exact path="/posts" render={() =>  
+            <PostContainer 
+            posts={this.searchFilterPost()} 
+            locationIds={this.state.locationIds}
+            changeFilterType={this.changeFilterType}
+          />}/>
+          <Route exact path="/" render={() =>  
+            <PostContainer 
+            posts={this.searchFilterPost()} 
+            locationIds={this.state.locationIds}
+            changeFilterType={this.changeFilterType}
+          />}/>
+        </Switch>
       </div>
     );
   }
 }
+
 
 export default App;
 

@@ -1,5 +1,4 @@
 import React from 'react'
-// import SearchForm from './SearchForm'
 
 const Search = props => {
         return (
