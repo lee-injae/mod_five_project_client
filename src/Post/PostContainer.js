@@ -1,19 +1,20 @@
 import React from 'react'
 import PostCard from './PostCard'
-
+import Filters from './Filters'
 import { Card } from 'semantic-ui-react'
 
-class PostContainer extends React.Component {
-
-    render(){
+const PostContainer = (props) => {
         return (
-            <Card.Group itemsPerRow={5}  >
-                {this.props.posts.map(post => {
-                    return <PostCard postObj={post} key={post.id} />})}
-            </Card.Group>
+            <div>
+                <Filters changeType={props.changeFilterType} 
+                locationIds={props.locationIds} />
+                <Card.Group itemsPerRow={5}  >
+                    {props.posts.map(post => {
+                        return <PostCard postObj={post} key={post.id} />})}
+                </Card.Group>
+            </div>
         )
     }
-}
 
 
 export default PostContainer

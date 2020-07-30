@@ -12,7 +12,6 @@ import { Form } from 'semantic-ui-react'
         ]
             return (
                 <div>
-                    <h2>Sign up</h2>
                     <Form onSubmit={props.handleSubmit}>
                         <Form.Group widths="equal">
                             <Form.Input fluid required label="Email" name="email" placeholder="abc@def.com" 

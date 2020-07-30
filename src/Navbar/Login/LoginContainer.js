@@ -2,8 +2,7 @@ import React from 'react'
 
 import Signup from "./Signup"
 import Login from "./Login"
-
-import "./LoginContainer.css"
+import { Modal } from 'semantic-ui-react'
 
 class LoginContainer extends React.Component {
 
@@ -17,14 +16,12 @@ class LoginContainer extends React.Component {
     }
 
     handleChange = (e) => {
-        // debugger
         let formObj = this.state.form 
         formObj[e.target.name] = e.target.value
         this.setState({ form: formObj }) 
     }
 
     handleDropdownChange = (e,data) => {
-        // debugger
         let formObj = this.state.form
         formObj[data.name] = data.value
         this.setState({ form: formObj})
@@ -48,9 +45,13 @@ class LoginContainer extends React.Component {
         })
         .then(r => r.json())
         .then(data => {
-            localStorage.setItem('token', data.jwt)
             this.setState({ form: {} })
-            console.log(data)
+            if (data.jwt) {
+            localStorage.setItem('token', data.jwt)
+            this.props.setUser(data)
+            return data.status
+            }
+        console.log(data)
         })
     }
 
@@ -75,29 +76,33 @@ class LoginContainer extends React.Component {
                 this.props.setUser(data)
                 return data.status
             }
-            return console.log(data)
+            console.log(data)
         })
     }
 
-    toggleForm = () => {
-        this.setState({showSignup: !this.state.showSignup})
-    }
-
     render(){
-        // const { showSignup, showLogin } = this.state
-        // console.log(this.props.locationIds)
         return(
             <div className="login-container">
-                <div className='login-toggle-bar'>
-                    <div className='login-tab' onClick={this.toggleForm}>Sign up</div>
-                    <div className='login-tab' onClick={this.toggleForm}>Log in</div>
+                <div className='item'>
+                    <Modal trigger={<div className='ui button'>Sign up</div>}>
+                        <Modal.Header>Sign up</Modal.Header>
+                        <Modal.Content>
+                            <Signup handleSubmit={this.handleSignupSubmit} 
+                                    handleChange={this.handleChange}
+                                    form={this.state.form} 
+                                    handleDropdownChange={this.handleDropdownChange} 
+                                    locationIds={this.props.locationIds} />
+                        </Modal.Content>
+                    </Modal>
+                    <Modal trigger={<div className='ui button'>Log in</div>}>
+                        <Modal.Header>Log in</Modal.Header>
+                            <Modal.Content>
+                                <Login handleSubmit={this.handleLoginSubmit} 
+                                       handleChange={this.handleChange}
+                                       form={this.state.form} />
+                            </Modal.Content>
+                    </Modal>
                 </div>
-                
-                {this.state.showSignup ? <Signup handleSubmit={this.handleSignupSubmit} handleChange={this.handleChange}
-                form={this.state.form} handleDropdownChange={this.handleDropdownChange} locationIds={this.props.locationIds} /> 
-                : <Login handleSubmit={this.handleLoginSubmit} handleChange={this.handleChange}
-                form={this.state.form} />  
-                }
             </div>
             );
         }

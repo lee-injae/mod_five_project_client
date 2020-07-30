@@ -5,10 +5,10 @@ import { Route } from 'react-router-dom'
 import './App.css';
 
 import NavBar from "./Navbar/NavBar"
-import LoginContainer from "./Login/LoginContainer"
+import LoginContainer from "./Navbar/Login/LoginContainer"
 import PostContainer from './Post/PostContainer';
-import PostForm from './PostForm'
-import Filters from './Filters'
+import PostForm from './Navbar/PostForm'
+import Filters from './Post/Filters'
 // import PostCardShow from './Post/PostCardShow';
 
 class App extends React.Component {
@@ -95,7 +95,7 @@ class App extends React.Component {
 
   addPost = (post) => {
     let newPost = [post, ...this.state.posts]
-    this.setState({posts: newPost})
+    this.setState({ posts: newPost })
   }
 
   changeFilterType = (e) => {
@@ -125,19 +125,23 @@ class App extends React.Component {
   render(){
     // let searchFilteredPosts = this.searchFilterPost()
     // let sortedPosts = this.sortedPostsByDate(this.state.posts) 
-  
     return (
       <div className="App">
-        <NavBar currentUser={!!this.state.currentUser} setUser={this.setUser} 
-        removeUser={this.removeUser} changeSearch={this.changeSearch}  />
-        <Filters changeType={this.changeFilterType} locationIds={this.state.locationIds} />
-        <Route exact={true} path="/" render={() => <LoginContainer
-          setUser={this.setUser} locationIds={this.state.locationIds}
-        />}/>
-        <Route exact={true} path="/posts" render={() => <PostContainer 
-          posts={this.searchFilterPost()}
-        />}/>
-        <PostForm addPost={this.addPost} currentUser={this.state.currentUser} />
+        <NavBar 
+          isLogged={!!this.state.currentUser} 
+          userInfo={this.state.currentUser} 
+          removeUser={this.removeUser}
+          changeSearch={this.changeSearch} 
+          setUser={this.setUser} 
+          locationIds={this.state.locationIds}
+          addPost={this.addPost} 
+          currentUser={this.state.currentUser} 
+        />
+        <PostContainer 
+          posts={this.searchFilterPost()} 
+          locationIds={this.state.locationIds}
+          changeType={this.changeFilterType}
+        />
       </div>
     );
   }

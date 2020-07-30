@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
-import PostCardShow from './PostCardShow'
+import PostDetail from './PostDetail'
 
 class PostCard extends React.Component {
 
@@ -56,7 +56,7 @@ class PostCard extends React.Component {
             
               {this.state.showDetails ? 
               <div>
-                  <PostCardShow postObj={this.props.postObj}  />
+                  <PostDetail postObj={this.props.postObj}  />
                   </div> 
                   : 
                   null }          
