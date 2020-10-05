@@ -111,18 +111,3 @@ class LoginContainer extends React.Component {
 export default LoginContainer
 
 
-//     onOpenSignup = () => {
-//         this.setState({ showSignup: true })
-//     }
-
-//     onOpenLogin = () => {
-//         this.setState({ showLogin: true })
-//     }
-
-//     onCloseSignup =() => {
-//         this.setState({ showSignup: false })
-//     }
-
-//     onCloseLogin =() => {
-//         this.setState({ showLogin: false })
-//     }

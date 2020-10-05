@@ -81,8 +81,8 @@ class App extends React.Component {
   }
 
   changeSearch = (e) => {
-    let searchText = e.target.value.toLowerCase()
-    this.setState({ searchText: searchText })
+    let searchTextByUser = e.target.value.toLowerCase()
+    this.setState({ searchText: searchTextByUser })
   }
  
   searchFilterPost = () => {
